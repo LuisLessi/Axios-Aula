@@ -1,16 +1,24 @@
 {
-    "tarefas":[
-            { "id": 1,
-             "titulo": "Aprender JavaScript",
-              "concluido": true
-            },        
-            { "id": 2,
-             "titulo": "Aprender Vue",
-             "concluido": true 
-            },
-            { "id": 3,
-             "titulo": "Aprender Axios",
-             "concluido": false 
-            }
-    ]
+  "tarefas": [
+    {
+      "id": 2,
+      "titulo": "Aprender Vue",
+      "concluido": false
+    },
+    {
+      "id": 3,
+      "titulo": "Aprender Axios",
+      "concluido": false
+    },
+    {
+      "titulo": "Aprender Quasar",
+      "concluido": true,
+      "id": 4
+    },
+    {
+      "titulo": "Aprender Javascript",
+      "concluido": false,
+      "id": 5
+    }
+  ]
 }
