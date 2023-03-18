@@ -19,7 +19,9 @@
             @concluir="editarTarefa" />
         </ul>
 
-        <p v-else>Nenhuma tarefa criada.</p>
+        <p v-else-if="!mensagemErro">Nenhuma tarefa criada.</p>
+
+        <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
 
         <TarefaSalvar v-if="exibirFormulario" :tarefa="tarefaSelecionada" @criar="criarTarefa" @editar="editarTarefa" />
 
@@ -31,6 +33,7 @@
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
 import api from '../services/api'
+import axios from 'axios'
 
 export default {
     components: {
@@ -41,17 +44,35 @@ export default {
         return {
             tarefas: [],
             exibirFormulario: false,
-            tarefaSelecionada: undefined
+            tarefaSelecionada: undefined,
+            mensagemErro: undefined
         }
     },
     created() {
         api.get('/tarefas').then((res) => {
             this.tarefas = res.data
+        }, error => {
+            console.log('Erro capturado no then: ', error)
+            return Promise.reject(error)
+        }).catch(error => {
+            console.log('Erro capturado no catch: ', error)
+            if (error.res){
+                this.mensagemErro = `Servidor retornou um erro ${error.message} ${error.res.statusText}` 
+                console.log('Erro [resposta]: ', error.res)
+            } else if (error.request) {
+                this.mensagemErro = `Erro ao tentar comunicar com o servidor: ${error.message}`
+                console.log('Erro [requisiçao]: ', error.request)
+            } else {
+                this.mensagemErro = `Erro ao fazer requisição ao servidor: ${error.message}`
+            }
+            return "Curso vueJs"
+        }).then((algumParametro) => {
+            console.log('Sempre executado!', algumParametro)
         })
     },
     computed: {
         tarefasOrdenadas() {
-            return this.tarefas.slice.sort((t1, t2) => {
+            return this.tarefas.sort((t1, t2) => {
                 if (t1.concluido === t2.concluido) {
                     return t1.titulo < t2.titulo
                     ? -1
@@ -65,7 +86,17 @@ export default {
     },
     methods: {
         criarTarefa(tarefa) {
-            api.post('/tarefas', tarefa).then((res) => {
+           /* api.post('/tarefas', tarefa).then((res) => {
+                console.log(res)
+                this.tarefas.push('POST:' + res.data)
+                this.resetar()
+            }) */
+            axios.request({
+                method: 'post',
+                baseURL: api.defaults.baseURL,
+                url: '/tarefas',
+                data: tarefa
+            }).then((res) => {
                 console.log(res)
                 this.tarefas.push('POST:' + res.data)
                 this.resetar()

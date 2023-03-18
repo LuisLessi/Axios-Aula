@@ -3,7 +3,7 @@
     {
       "id": 2,
       "titulo": "Aprender Vue",
-      "concluido": false
+      "concluido": true
     },
     {
       "id": 3,
@@ -12,13 +12,18 @@
     },
     {
       "titulo": "Aprender Quasar",
-      "concluido": true,
+      "concluido": false,
       "id": 4
     },
     {
       "titulo": "Aprender Javascript",
-      "concluido": false,
+      "concluido": true,
       "id": 5
+    },
+    {
+      "titulo": "Aprender angular",
+      "concluido": false,
+      "id": 6
     }
   ]
 }
