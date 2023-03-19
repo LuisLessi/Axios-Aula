@@ -51,6 +51,7 @@ export default {
     created() {
         api.get('/tarefas').then((res) => {
             this.tarefas = res.data
+            return 'Axios'
         }, error => {
             console.log('Erro capturado no then: ', error)
             return Promise.reject(error)

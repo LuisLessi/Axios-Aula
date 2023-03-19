@@ -8,7 +8,8 @@
     {
       "id": 3,
       "titulo": "Aprender Axios",
-      "concluido": false
+      "concluido": true,
+      "curso": "Vue JS"
     },
     {
       "titulo": "Aprender Quasar",
