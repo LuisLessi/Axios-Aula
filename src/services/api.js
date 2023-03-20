@@ -12,8 +12,6 @@ http.interceptors.request.use(config => {
         curso: "Vue JS"
     }
 
-    config.headers.common['Authorization'] = 'Bearer token_jwt'
-    config.headers.put['Meu-Cabecalho'] = 'Curso VueJs'
     return config
    /* return new Promise((resolve, reject) => {
         console.log('Fazendo requisição aguardar')

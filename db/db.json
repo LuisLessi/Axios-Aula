@@ -20,11 +20,6 @@
       "titulo": "Aprender Javascript",
       "concluido": true,
       "id": 5
-    },
-    {
-      "titulo": "Aprender angular",
-      "concluido": false,
-      "id": 6
     }
   ]
 }

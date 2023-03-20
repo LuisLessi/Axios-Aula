@@ -104,16 +104,27 @@ export default {
             })
         },
        
-        deletarTarefa(tarefa) {
+        async deletarTarefa(tarefa) {
             const confirmar = window.confirm(`Deseja deletar a tarefa "${tarefa.titulo}" ?`)
             if(confirmar) {
-                api.delete(`/tarefas/${tarefa.id}`)
+                /* api.delete(`/tarefas/${tarefa.id}`)
                 .then(res => {
                     console.log(`Delete /tarefas/${tarefa.id}`, res)
                     const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
                     this.tarefas.splice(indice, 1)
 
-                })
+                }) */
+                try {
+               const res = await api.delete(`/tarefas/${tarefa.id}`)
+               console.log(`Delete /tarefas/${tarefa.id}`, res)
+               const indice = this.tarefas.findIndex(t => t.id === tarefa.id)
+               this.tarefas.splice(indice, 1)
+                } catch (error) {
+                    console.log('Erro ao deletar tarefa: ', error)
+                } finally {
+                    console.log('sempre executado')
+                }
+               
             }
         },
         editarTarefa(tarefa) {
